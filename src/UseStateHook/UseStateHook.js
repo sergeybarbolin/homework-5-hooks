@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 
 /*
     Напишите компонент с двуми инпутами и кнопкой
@@ -22,4 +22,39 @@ import React, { useState } from "react";
     https://reactjs.org/docs/hooks-reference.html#usereducer
 */
 
-export const Form = () => {};
+export const Form = () => {
+    const [emailValue, setEmailValue] = useState('');
+    const [passValue, setPassValue] = useState('');
+    const [msg, setMsg] = useState('');
+
+    return (
+        <Fragment>
+            <input 
+                data-testid="email-input"
+                value={emailValue}
+                type='text'
+                onChange={e => setEmailValue(e.target.value)}
+            />
+            <input 
+                data-testid='password-input' 
+                value={passValue}
+                type='password'
+                onChange={e => setPassValue(e.target.value)}
+            />
+
+            <button 
+                data-testid='submit'
+                onClick={()=>{
+                    if (emailValue.length && passValue.length) {
+                        setMsg('Вы вошли')
+                    }
+                }}
+            >
+                Click
+            </button>
+
+            
+            <p data-testid={msg.length ? 'success-message' : '' }>{msg}</p> 
+        </Fragment>
+    )
+};
